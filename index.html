@@ -38,8 +38,8 @@
   <div class="kicker">🎮 Pendidikan Islam · Tingkatan 5 · KSSM</div>
   <div class="emblem">🏆</div>
   <div class="gtitle">Gamifikasi Alfaqih</div>
-  <div class="gsub">25 game · 150 misi · kini dengan Team Battle · Pilih pelajaran dan mula bermain!</div>
-  <div class="stats2"><div class="pill">⭐ <span id="ts">0</span> / 450 bintang</div><div class="pill">✅ <span id="td">0</span> / 21 tamat</div></div>
+  <div class="gsub">21 game · 105 misi · 20 jenis permainan · Nota flash card setiap pelajaran!</div>
+  <div class="stats2"><div class="pill">⭐ <span id="ts">0</span> / 315 bintang</div><div class="pill">✅ <span id="td">0</span> / 21 tamat</div></div>
  </div>
  <div class="tabs" id="tabs"></div>
  <div id="list"></div>
@@ -54,7 +54,7 @@ let cur='Semua';let TS=0,TD=0;
 function render(){TS=0;TD=0;
  document.getElementById('tabs').innerHTML=['Semua',...B.map(b=>b[0])].map(t=>`<button class="tab ${t===cur?'on':''}" data-t="${t}">${t==='Semua'?'🌐 Semua':B.find(b=>b[0]===t)[1]+' '+t}</button>`).join('');
  document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{cur=b.dataset.t;render()});
- document.getElementById('list').innerHTML=B.filter(b=>cur==='Semua'||b[0]===cur).map(([bn,ic])=>`<div class="sec"><h2>${ic} ${bn}</h2><div class="grid3">${L.filter(l=>l.bidang===bn).map(l=>{const p=prog(l.id);return `<a class="gc" href="${l.id}/" style="--ca:${l.a}"><button class="cp" data-id="${l.id}" data-t="P${l.no} · ${l.game}">🔗 Link</button><div class="no">PELAJARAN ${l.no}${p.d?' · ✅ TAMAT':''}</div><div class="ic">${l.icon}</div><div class="gn">${l.game}</div><div class="tt">${l.title}</div><div class="chips">${l.t.map(t=>`<span>${TL[t]}</span>`).join("")}</div><div class="pr"><span>⭐ ${p.s}/18</span><div class="bar"><i style="width:${p.s/18*100}%"></i></div></div></a>`}).join('')}</div></div>`).join('');
+ document.getElementById('list').innerHTML=B.filter(b=>cur==='Semua'||b[0]===cur).map(([bn,ic])=>`<div class="sec"><h2>${ic} ${bn}</h2><div class="grid3">${L.filter(l=>l.bidang===bn).map(l=>{const p=prog(l.id);return `<a class="gc" href="${l.id}/" style="--ca:${l.a}"><button class="cp" data-id="${l.id}" data-t="P${l.no} · ${l.game}">🔗 Link</button><div class="no">PELAJARAN ${l.no}${p.d?' · ✅ TAMAT':''}</div><div class="ic">${l.icon}</div><div class="gn">${l.game}</div><div class="tt">${l.title}</div><div class="chips">${l.t.map(t=>`<span>${TL[t]}</span>`).join("")}</div><div class="pr"><span>⭐ ${p.s}/15</span><div class="bar"><i style="width:${p.s/15*100}%"></i></div></div></a>`}).join('')}</div></div>`).join('');
  L.forEach(l=>{const p=prog(l.id);TS+=p.s;TD+=p.d?1:0});document.querySelectorAll('.gc .cp').forEach(b=>b.onclick=e=>{e.preventDefault();e.stopPropagation();const u=new URL(b.dataset.id+'/',location.href).href;window.alfaqihShare?alfaqihShare(u,b.dataset.t):null});document.getElementById('ts').textContent=TS;document.getElementById('td').textContent=TD}
 render();
 </script>
